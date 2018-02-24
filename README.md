@@ -15,6 +15,8 @@
 ***Pre-Installation:*** 
     Install Redis DB from the official web page: https://redis.io/download
 
+This project is on Demo at: http://13.126.120.225:5000
+
 /* To test downloaderbhavfile.py, comment end of the code in downloaderbhavfile.py mentioned below part in :
 ```       
           schedule.every(30).minutes.do(getBhav)
@@ -25,6 +27,9 @@
    And Uncomment the :
       "#getBhav()"
 */
+
+Author:
+***Jeevan - G1***
 
 
 
