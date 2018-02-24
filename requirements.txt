@@ -1,6 +1,5 @@
 CherryPy==14.0.0
-Jinja2==2.10
-pypiwin32==219
+Jinja2==2.10 
 python-dateutil==2.6.1
 pytz==2018.3
 redis==2.10.6
