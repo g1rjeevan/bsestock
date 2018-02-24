@@ -16,10 +16,12 @@ def silentRemove(filename):
 
 def bhavDate():
     current_time = datetime.datetime.now()
-
-    if (current_time.hour < 10):
-        current_time = (current_time - datetime.timedelta(hours=12))
     dateStr = current_time
+
+    if (current_time.hour < 16):
+        current_time = (current_time - datetime.timedelta(hours=12))
+
+        dateStr = current_time
 
     if(current_time.weekday()>4):
         # get last friday if today is sunday/ saturaday
@@ -31,7 +33,8 @@ def bhavDate():
     return dateStr
 
 def getBhav():
-    date_str_full = bhavDate().date()
+    date_str_full = bhavDate()
+    print date_str_full
     date_str = bhavDate().strftime("%d%m%y")
     downloadUrl = "https://www.bseindia.com/download/BhavCopy/Equity/EQ"+date_str+"_CSV.ZIP"
     bhavZipFile = "eq" + date_str + "_csv.zip"
@@ -77,6 +80,7 @@ def getBhav():
     finally:
         print datetime.datetime.now()
 
+    return redis_server
 
 #getBhav()
 

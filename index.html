@@ -36,9 +36,6 @@
     <div class="card material-table">
       <div class="table-header">
           <span class="jumbotron">Top 10 BSE Stock of the {{ list_header }}</span>
-        <div class="actions">
-          <a href="#" class="search-toggle waves-effect btn-flat nopadding"><i class="material-icons">search stocks</i></a>
-        </div>
       </div>
       <table id="datatable_top">
         <thead>
@@ -307,29 +304,13 @@ $(document).ready(function() {
     },
     bAutoWidth: false
   });
-  $('#datatable_top').dataTable({
-    "oLanguage": {
-      "sStripClasses": "",
-      "sSearch": "",
-      "sSearchPlaceholder": "Enter Keywords Here",
-      "sInfo": "_START_ -_END_ of _TOTAL_",
-      "sLengthMenu": '<span>Rows per page:</span><select class="browser-default">' +
-        '<option value="10">10</option>' +
-        '<option value="20">20</option>' +
-        '<option value="30">30</option>' +
-        '<option value="40">40</option>' +
-        '<option value="50">50</option>' +
-        '<option value="-1">All</option>' +
-        '</select></div>'
-    },
-    bAutoWidth: false
-  });
+
   console.log("Welcome to the Zerodha Interview Page");
   console.log("There are 2 things going on this page:");
   console.log("     1. One Script called downloaderbhavfile.py runs on a scheduler which is more like a celery that run every 30 minutes");
   console.log("     2. This is a web application written using CherryPy and Redis DB, Which is developed in AWS instance");
   console.log("                                                                                                         ");
-  console.log("Code is available in Github: https://github.com/g1rjeevan/bsestock");
+  console.log("Code is available in Github: ");
 
 });
 </script>

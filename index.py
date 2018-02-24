@@ -8,6 +8,8 @@ import cherrypy
 import time
 from jinja2 import Environment, FileSystemLoader
 
+from downloaderbhavfile import getBhav
+
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
 env=Environment(loader=FileSystemLoader(CUR_DIR),
 trim_blocks=True)
@@ -16,7 +18,7 @@ class Index(object):
 
     @cherrypy.expose()
     def index(self):
-        redis_server = redis.Redis("localhost")
+        redis_server = getBhav()
         bseobjs = redis_server.get('bhavcopy')
         bseobjtop = redis_server.get('bsetop')
         bsedatestr = redis_server.get('datestr')
