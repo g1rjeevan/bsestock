@@ -8,7 +8,7 @@ from models import BSEObject
 def silentRemove(filename):
     try:
         os.remove(filename)
-        print filename + " removed"+ str(datetime.datetime.now())
+        print filename + " removed"
     except OSError as e:
         if e.errno != errno.ENOENT:
             raise e
@@ -51,8 +51,7 @@ def getBhav():
             fileHandler.extractall(destination)
             fileHandler.close()
             data = []
-
-            with open(destination + '\EQ' + date_str + '.CSV') as f:
+            with open(os.path.join(destination, 'EQ' + date_str + '.CSV')) as f:
                 for row in csv.DictReader(f):
                     data.append(BSEObject(row.get("SC_CODE"), row.get("SC_NAME"), float(row.get("OPEN")), float(row.get("LOW")),
                                           float(row.get("CLOSE")), float(row.get("HIGH"))))
@@ -72,7 +71,7 @@ def getBhav():
     try:
         time.sleep(2)
         silentRemove(fullpath)
-        silentRemove(destination + '\EQ' + date_str + '.CSV')
+        silentRemove(os.path.join(destination, 'EQ' + date_str + '.CSV'))
     except:
         schedule.every(30).minutes.do(getBhav)
     finally:
