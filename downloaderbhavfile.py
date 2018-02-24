@@ -68,20 +68,20 @@ def getBhav():
     except:
         import sys
         print str(sys.exc_info())
-        schedule.every(1).minutes.do(getBhav)
+        schedule.every(30).minutes.do(getBhav)
     try:
         time.sleep(2)
         silentRemove(fullpath)
         silentRemove(destination + '\EQ' + date_str + '.CSV')
     except:
-        schedule.every(1).minutes.do(getBhav)
+        schedule.every(30).minutes.do(getBhav)
     finally:
         print datetime.datetime.now()
 
 
 #getBhav()
 
-schedule.every(1).minutes.do(getBhav)
+schedule.every(30).minutes.do(getBhav)
 
 while 1:
     schedule.run_pending()
