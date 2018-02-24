@@ -79,14 +79,13 @@ def getBhav():
         schedule.every(30).minutes.do(getBhav)
     finally:
         print datetime.datetime.now()
-
-    return redis_server
+        return redis_server
 
 #getBhav()
 
-schedule.every(30).minutes.do(getBhav)
-
-while 1:
-    schedule.run_pending()
-    time.sleep(1)
+# schedule.every(30).minutes.do(getBhav)
+#
+# while 1:
+#     schedule.run_pending()
+#     time.sleep(1)
 
