@@ -1,7 +1,6 @@
 ##Developer G1-Ee sala cup namde...🎉🏆🎊
 import csv, datetime,urllib2,os,json,schedule,time,errno,zipfile,redis
 
-import operator
 
 from models import BSEObject
 
@@ -21,7 +20,6 @@ def bhavDate():
 
     if (current_time.hour < 16):
         current_time = (current_time - datetime.timedelta(hours=12))
-
         dateStr = current_time
 
     if(current_time.weekday()>4):
@@ -34,8 +32,10 @@ def bhavDate():
     return dateStr
 
 def getBhav():
-    date_str_full = bhavDate()
-    print date_str_full
+    try:
+        date_str_full = bhavDate().date()
+    except:
+        date_str_full = datetime.datetime.combine( bhavDate(), datetime.datetime.min.time())
     date_str = bhavDate().strftime("%d%m%y")
     downloadUrl = "https://www.bseindia.com/download/BhavCopy/Equity/EQ"+date_str+"_CSV.ZIP"
     bhavZipFile = "eq" + date_str + "_csv.zip"
@@ -43,7 +43,6 @@ def getBhav():
     if os.path.exists(destination) is False:
         os.mkdir(destination)
     fullpath = os.path.join(destination, bhavZipFile)
-    print fullpath
 
     try:
         with open(fullpath, 'w+b') as f:
@@ -64,7 +63,6 @@ def getBhav():
             json_string = json.dumps([ob.__dict__ for ob in data])
             redis_server = redis.Redis("localhost")
             redis_server.flushall()
-
             redis_server.set("bhavcopy",json_string)
             redis_server.set("bsetop",json.dumps([ob.__dict__ for ob in sorted_data[:10]]))
             redis_server.set("datestr",date_str_full)
@@ -82,10 +80,10 @@ def getBhav():
         print datetime.datetime.now()
         return redis_server
 
-#getBhav()
-
-# schedule.every(30).minutes.do(getBhav)
-#
+# #getBhav()
+# schedule.every().day.at("11:00").do(getBhav)
+# # schedule.every(30).minutes.do(getBhav)
+# #
 # while 1:
 #     schedule.run_pending()
 #     time.sleep(1)

@@ -7,7 +7,6 @@ import os
 import cherrypy
 import time
 from jinja2 import Environment, FileSystemLoader
-
 from downloaderbhavfile import getBhav
 
 CUR_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -26,7 +25,12 @@ class Index(object):
         bseobjtop = json.loads(bseobjtop)
         template = env.get_template('index.html')
         # RENDER TEMPLATE PASSING IN DATA
-        bsedatestr = time.strftime("%d %b %Y",time.strptime(bsedatestr, "%Y-%m-%d"))
+        print bsedatestr,"sdds"
+        try:
+            bsedatestr = time.strftime("%d %b %Y",time.strptime(bsedatestr, "%Y-%m-%d"))
+        except:
+            bsedatestr = time.strftime("%d %b %Y", time.strptime(bsedatestr, "%Y-%m-%d  %H:%M:%S"))
+
         return template.render(title='Zerodha - BSE', description='This is a dev page',
                                list_header=bsedatestr, bseobjs=bseobjs,bseobjtop=bseobjtop, site_title="Stock list")
 
